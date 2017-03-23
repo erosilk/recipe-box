@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RecipeButton from './RecipeButton'
 import RecipeDisplay from './RecipeDisplay'
+import RecipeForm from './RecipeForm'
 
 class Window extends Component
 {
@@ -8,7 +9,10 @@ class Window extends Component
     {
         super(props)
         this.changeRecipeDisplay = this.changeRecipeDisplay.bind(this);
+        this.toggleRecipeForm = this.toggleRecipeForm.bind(this);
+        this.submitRecipe = this.submitRecipe.bind(this);
         this.state = {
+            isForm: false,
             currentRecipe: 0,
             recipes: [
                 {"Frijoles Crudos": ["Frijoles", "Agua", "Sal"]},
@@ -24,6 +28,26 @@ class Window extends Component
         })
     }
 
+    toggleRecipeForm() {
+        this.setState({
+            isForm: !this.state.isForm
+        })
+    }
+
+    submitRecipe(recipeName, ingredientArray) {
+
+        let newRecipeList = this.state.recipes
+        newRecipeList.push({[recipeName]: ingredientArray});
+
+        this.setState({
+            recipes: newRecipeList
+        })
+
+        this.toggleRecipeForm();
+
+    }
+
+
 
     render() { 
         let RecipeList = this.state.recipes.map((obj) => {
@@ -32,7 +56,10 @@ class Window extends Component
         }
         );
 
+       
+       if (this.state.isForm) {
         return (
+        <div>
         <div className="window">
             <div className="header">
                 <h1>Recipe Box</h1>
@@ -40,7 +67,7 @@ class Window extends Component
             <div className="container">
                 <div className="recipelist">
                     {RecipeList}
-                    <div className="add">add</div>
+                    <div className="add" onClick={this.toggleRecipeForm}>add</div>
                 </div>
                 <div className="currentrecipe">
                     <RecipeDisplay recipe={this.state.recipes[this.state.currentRecipe]} />
@@ -48,8 +75,30 @@ class Window extends Component
                 </div>
             </div>
         </div>
-
+        <RecipeForm submitRecipe={this.submitRecipe} recipeName="" recipeList=""/>
+        </div>
         )
+       } else {
+        return(
+        <div className="window">
+            <div className="header">
+                <h1>Recipe Box</h1>
+            </div>
+            <div className="container">
+                <div className="recipelist">
+                    {RecipeList}
+                    <div className="add" onClick={this.toggleRecipeForm}>add</div>
+                </div>
+                <div className="currentrecipe">
+                    <RecipeDisplay recipe={this.state.recipes[this.state.currentRecipe]} />
+                    <div className="edit">edit</div>
+                </div>
+            </div>
+        </div>
+        )
+       }
+
+        
     }
 
 
