@@ -7,6 +7,7 @@ class RecipeForm extends Component
         this.updateRNText = this.updateRNText.bind(this);
         this.updateRIText = this.updateRIText.bind(this);
         this.state = {
+            isEdit: this.props.isEdit,
             recipeNameVal: this.props.recipeName,
             recipeIngredientsVal: this.props.recipeList
         }
@@ -28,6 +29,14 @@ class RecipeForm extends Component
 
         let recipeArray = this.state.recipeIngredientsVal.split(",")
 
+        let button = <button onClick={() => this.props.submitRecipe(this.state.recipeNameVal, recipeArray)}>Add</button>
+
+        if (this.state.isEdit) {
+
+            button = <button onClick={() => this.props.modifyRecipe(this.state.recipeNameVal, recipeArray)}>Edit</button>
+
+        }
+
         return (
             <div className="form-bg">
                 <div className="form-container">
@@ -36,7 +45,7 @@ class RecipeForm extends Component
                     <input type="text" name="recipename" value={this.state.recipeNameVal} onChange={this.updateRNText} />
                     <p>Ingredients:</p><br/>
                     <input type="text" name="recipeingredients" value={this.state.recipeIngredientsVal} onChange={this.updateRIText} /><br/>
-                    <button onClick={() => this.props.submitRecipe(this.state.recipeNameVal, recipeArray)}>Add</button>
+                    {button}
                 </div>
             </div>
         )
