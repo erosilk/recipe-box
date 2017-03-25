@@ -68,18 +68,34 @@ class Window extends Component
             recipes: newRecipeList
         })
 
+        if (this.state.currentRecipe < 0) {
+            this.setState({
+                currentRecipe: 0
+            })
+        }
+
         this.toggleRecipeForm();
 
     }
 
     deleteRecipe() {
 
+
+        if (this.state.currentRecipe === this.state.recipes.length-1) {
+            this.setState({
+                currentRecipe: Number(this.state.currentRecipe)-1
+            })
+        }
+
         let newRecipeList = this.state.recipes
         newRecipeList.splice(this.state.currentRecipe, 1);
+
 
         this.setState({
             recipes: newRecipeList,
         })
+
+        
 
     }
 
@@ -106,9 +122,7 @@ class Window extends Component
 
 
             if (this.state.isEdit) {
-                let ingredientArray = this.state.recipes 
-                                        [this.state.currentRecipe]
-                                        [Object.keys(this.state.recipes[this.state.currentRecipe])[0]];
+                let ingredientArray = this.state.recipes[this.state.currentRecipe][Object.keys(this.state.recipes[this.state.currentRecipe])[0]];
 
                 let ingredientString = ingredientArray.join();
                 recipeForm = <RecipeForm submitRecipe={this.submitRecipe} 
@@ -119,8 +133,24 @@ class Window extends Component
             }
         }
 
+        let recipeList = <RecipeDisplay recipe={this.state.recipes[this.state.currentRecipe]} />
+
         
+        
+        
+
+        let currentRecipeButtons = <div><div className="edit" onClick={this.editRecipe}>edit</div>
+                                    <div className="delete" onClick={this.deleteRecipe}>delete</div>
+                                    </div>
        
+
+        if (this.state.recipes.length === 0) {
+            recipeList = <div className="recipedisplay">
+                            <h1 className="recipedisplaytitle">There are no recipes!</h1>
+                         </div>
+            currentRecipeButtons = <div></div>
+        }
+
         return (
         <div>
         <div className="window">
@@ -133,9 +163,8 @@ class Window extends Component
                     <div className="add" onClick={this.toggleRecipeForm}>add</div>
                 </div>
                 <div className="currentrecipe">
-                    <RecipeDisplay recipe={this.state.recipes[this.state.currentRecipe]} />
-                    <div className="edit" onClick={this.editRecipe}>edit</div>
-                    <div className="delete" onClick={this.deleteRecipe}>delete</div>
+                    {recipeList}
+                    {currentRecipeButtons}
                 </div>
             </div>
         </div>
