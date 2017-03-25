@@ -11,7 +11,7 @@ class Window extends Component
         this.changeRecipeDisplay = this.changeRecipeDisplay.bind(this);
         this.toggleRecipeForm = this.toggleRecipeForm.bind(this);
         this.submitRecipe = this.submitRecipe.bind(this);
-        this.editRecipe = this.editRecipe.bind(this);
+        this.toggleEditRecipeForm = this.toggleEditRecipeForm.bind(this);
         this.modifyRecipe = this.modifyRecipe.bind(this);
         this.deleteRecipe = this.deleteRecipe.bind(this);
         this.state = {
@@ -38,7 +38,7 @@ class Window extends Component
         })
     }
 
-    editRecipe() {
+    toggleEditRecipeForm() {
         this.setState({
             isEdit: !this.state.isEdit
         });
@@ -135,14 +135,11 @@ class Window extends Component
 
         let recipeList = <RecipeDisplay recipe={this.state.recipes[this.state.currentRecipe]} />
 
-        
-        
-        
-
-        let currentRecipeButtons = <div><div className="edit" onClick={this.editRecipe}>edit</div>
-                                    <div className="delete" onClick={this.deleteRecipe}>delete</div>
+        let currentRecipeButtons = <div className="currentRecipeButtons">
+                                        <div className="add" onClick={this.toggleRecipeForm}><i className="fa fa-plus-square" aria-hidden="true"></i>Add</div>
+                                        <div className="edit" onClick={this.toggleEditRecipeForm}><i className="fa fa-pencil" aria-hidden="true"></i>Edit</div>
+                                        <div className="delete" onClick={this.deleteRecipe}><i className="fa fa-trash-o" aria-hidden="true"></i>Delete</div>
                                     </div>
-       
 
         if (this.state.recipes.length === 0) {
             recipeList = <div className="recipedisplay">
@@ -157,16 +154,19 @@ class Window extends Component
             <div className="header">
                 <h1>Recipe Box</h1>
             </div>
+            <div className="footer">
+                {currentRecipeButtons}
+            </div>
             <div className="container">
                 <div className="recipelist">
                     {RecipeList}
-                    <div className="add" onClick={this.toggleRecipeForm}>add</div>
+                    
                 </div>
                 <div className="currentrecipe">
                     {recipeList}
-                    {currentRecipeButtons}
                 </div>
             </div>
+            
         </div>
         {recipeForm}
         </div>
