@@ -19,5 +19,5 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://erosilk.github.io/recipe-box/build"
+  "homepage": "https://erosilk.github.io/recipe-box"
 }
