@@ -69,12 +69,14 @@ class RecipeForm extends Component
                     <p>{this.labels.recipeName}</p>
                     <input type="text" name="recipename" 
                                        value={this.state.recipeNameVal} 
-                                       onChange={this.updateRNText} />
+                                       onChange={this.updateRNText}
+                                       placeholder="Insert the name of your recipe here." />
 
                     <p>{this.labels.recipeIngredients}</p>
                     <input type="text" name="recipeingredients" 
                                        value={this.state.recipeIngredientsVal} 
-                                       onChange={this.updateRIText} />
+                                       onChange={this.updateRIText}
+                                       placeholder="Insert ingredients separated by a comma." />
                     <br/>
                     {message}
                     {button}
