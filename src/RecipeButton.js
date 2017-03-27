@@ -4,11 +4,11 @@ class RecipeButton extends Component
 {
     render() {
 
+        let classname = "recipebutton"
+
         if (this.props.id === this.props.currentRecipe) {
-            var classname = "recipebutton selected"
-        } else {
-            var classname = "recipebutton"
-        }
+            classname += " selected"
+        } 
 
         return (
             <div className={classname} onClick={() => this.props.changeRecipeDisplay(this.props.id)}>
