@@ -39,11 +39,16 @@ button:hover {
   display: flex;
   flex-direction: column;
   width: 300px;
-  height: 230px;
+  height: auto;
   margin-right: -170px;
   margin-top: -150px;
   position: absolute;
   top: 50%;
   right: 50%;
   background-color: white;
+  transition: height 0.2s ease;
+}
+
+.errormessage {
+    margin: 10px;
 }

@@ -53,7 +53,7 @@ class RecipeForm extends Component
 
 
         if (this.state.recipeNameVal === "" || this.state.recipeIngredientsVal === "") {
-            message = <div>{this.labels.emptyError}</div>
+            message = <div className="errormessage">{this.labels.emptyError}</div>
             button = <button>{this.labels.addButton}</button>
             if (this.state.isEdit) {
             button = <button>{this.labels.editButton}</button>

@@ -3,6 +3,7 @@ import RecipeButton from './RecipeButton'
 import RecipeDisplay from './RecipeDisplay'
 import RecipeForm from './RecipeForm'
 
+
 class Window extends Component
 {
     constructor(props)
@@ -14,7 +15,9 @@ class Window extends Component
         this.toggleEditRecipeForm = this.toggleEditRecipeForm.bind(this);
         this.modifyRecipe = this.modifyRecipe.bind(this);
         this.deleteRecipe = this.deleteRecipe.bind(this);
-        this.state = {
+
+        if (window.localStorage.getItem('recipes') === null) {
+            this.state = {
             isForm: false,
             isEdit: false,
             currentRecipe: 0,
@@ -22,9 +25,20 @@ class Window extends Component
                 {"Frijoles Crudos": ["Frijoles", "Agua", "Sal"]},
                 {"Ensalada": ["Tomate", "Lechuga", "Sal", "Vinagre"]},
                 {"Papas Fritas": ["Papas", "Aceite"]}
-            ]
+                ]
+            }   
+        } else {
+            this.state = JSON.parse(window.localStorage.getItem('recipes'));
         }
+
+        
     }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        window.localStorage.setItem('recipes', JSON.stringify(this.state))
+    }
+
 
     changeRecipeDisplay(val) {
         this.setState({
@@ -74,6 +88,8 @@ class Window extends Component
             })
         }
 
+
+
         this.toggleRecipeForm();
 
     }
@@ -98,6 +114,8 @@ class Window extends Component
         
 
     }
+
+
 
 
 
@@ -145,8 +163,11 @@ class Window extends Component
             recipeList = <div className="recipedisplay">
                             <h1 className="recipedisplaytitle">There are no recipes!</h1>
                          </div>
-            currentRecipeButtons = <div></div>
+            currentRecipeButtons = <div className="currentRecipeButtons">
+                                        <div className="add" onClick={this.toggleRecipeForm}><i className="fa fa-plus-square" aria-hidden="true"></i>Add</div>
+                                    </div>
         }
+
 
         return (
         <div>
