@@ -125,7 +125,8 @@ class Window extends Component
             return <RecipeButton key={ID} 
                                  recipeName={Object.keys(obj)[0]}
                                  changeRecipeDisplay={this.changeRecipeDisplay} 
-                                 id={ID} />
+                                 id={ID} 
+                                 currentRecipe={this.state.currentRecipe}/>
         }
         );
 
