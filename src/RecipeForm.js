@@ -60,7 +60,11 @@ class RecipeForm extends Component
             }
         }
 
-        
+        let goBack = this.props.toggleRecipeForm;
+
+        if (this.props.isEdit) {
+            goBack = this.props.toggleEditRecipeForm;
+        }
 
         return (
             <div className="form-bg">
@@ -73,13 +77,16 @@ class RecipeForm extends Component
                                        placeholder="Insert the name of your recipe here." />
 
                     <p>{this.labels.recipeIngredients}</p>
-                    <input type="text" name="recipeingredients" 
+                    <textarea type="text" name="recipeingredients" 
                                        value={this.state.recipeIngredientsVal} 
                                        onChange={this.updateRIText}
                                        placeholder="Insert ingredients separated by a comma." />
                     <br/>
                     {message}
+                    <div className="formbuttons">
                     {button}
+                    <button onClick={goBack}> Back </button>
+                    </div>
                 </div>
             </div>
         )

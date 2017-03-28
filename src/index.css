@@ -132,3 +132,18 @@ li {
 i {
   margin-right: 10px;
 }
+
+.formbuttons {
+  display: flex;
+  justify-content: space-between
+}
+
+.formbuttons button {
+  padding: 5px 40px;
+
+}
+
+.form-container textarea {
+  resize: vertical;
+  max-height: 100px;
+}

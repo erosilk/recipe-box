@@ -137,7 +137,9 @@ class Window extends Component
                                      modifyRecipe={this.modifyRecipe}
                                      recipeName="" 
                                      recipeList=""
-                                     isEdit={false}/>
+                                     isEdit={false}
+                                     toggleRecipeForm={this.toggleRecipeForm}
+                                     toggleEditRecipeForm={this.toggleEditRecipeForm}/>
 
 
             if (this.state.isEdit) {
@@ -148,7 +150,9 @@ class Window extends Component
                                          modifyRecipe={this.modifyRecipe}
                                          recipeName={Object.keys(this.state.recipes[this.state.currentRecipe])[0]} 
                                          recipeList={ingredientString}
-                                         isEdit={true}/>
+                                         isEdit={true}
+                                         toggleRecipeForm={this.toggleRecipeForm}
+                                         toggleEditRecipeForm={this.toggleEditRecipeForm}/>
             }
         }
 
